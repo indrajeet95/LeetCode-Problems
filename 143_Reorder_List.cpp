@@ -65,3 +65,50 @@ public:
         return prev;
     }
 };
+
+/**
+ * Definition for singly-linked list.
+ * struct ListNode {
+ *     int val;
+ *     ListNode *next;
+ *     ListNode(int x) : val(x), next(NULL) {}
+ * };
+ */
+class Solution {
+public:
+    void reorderList(ListNode* head) {
+        if(head == NULL || head->next == NULL)
+            return;
+        
+        ListNode* p = head;
+        ListNode* pp = head;
+        while(pp->next != NULL && pp->next->next != NULL)
+        {
+            p = p->next;
+            pp = pp->next->next;
+        }
+        
+        ListNode* prev = p;
+        cout << prev->val;
+        ListNode* curr = prev->next;
+        while(curr->next!=NULL)
+        {
+            ListNode* forward = curr->next;
+            curr->next = forward->next;
+            forward->next = prev->next;
+            prev->next = forward;
+        }
+        
+        p = head;
+        pp = prev->next;
+        while(p != prev)
+        {
+            prev->next = pp->next;
+            pp->next = p->next;
+            p->next = pp;
+            p = pp->next;
+            pp = prev->next;
+        }
+
+    }
+};
