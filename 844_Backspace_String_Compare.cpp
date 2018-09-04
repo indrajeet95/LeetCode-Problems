@@ -47,3 +47,29 @@ public:
             return false;
     }
 };
+
+class Solution {
+public:
+    string getherback(string str)
+    {
+        int n = str.length();
+        string res;
+        int count = 0;
+        for(int i=n-1;i>=0;i--)
+        {
+            if(str[i] == '#')
+                count++;
+            else
+            {
+                if(count>0)
+                    count--;
+                else
+                res += str[i];
+            }
+        }
+        return res;
+    }
+    bool backspaceCompare(string S, string T) {
+        return getherback(S) == getherback(T);
+    }
+};
