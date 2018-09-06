@@ -36,3 +36,29 @@ public:
         return res;
     }
 };
+
+class Solution {
+public:
+    string findLongestWord(string s, vector<string>& d) {
+        string res;
+        for(int i=0;i<d.size();i++)
+        {
+            int l1=0,l2=0;
+            bool possible = false;
+            while(l1 < s.length() && l2 < d[i].length())
+            {
+                while(s[l1] != d[i][l2])
+                    l1++;
+                if(s[l1] == d[i][l2])
+                {
+                    l1++;
+                    l2++;
+                }
+            }
+            if(l2 == d[i].length())
+                if(res.size() < d[i].size() || (res.size() == d[i].size() && res > d[i]))
+                    res = d[i];
+        }
+        return res;
+    }
+};
