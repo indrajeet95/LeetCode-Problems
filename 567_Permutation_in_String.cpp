@@ -48,3 +48,40 @@ public:
         return false;
     }
 };
+
+class Solution {
+public:
+    bool checkInclusion(string s1, string s2) {
+        unordered_map<char,int> maps1;
+        for(int i=0;i<s1.length();i++)
+            maps1[s1[i]]++;
+        for(int i=0;i<=s2.length()-s1.length();i++)
+        {
+            string temp = s2.substr(i,s1.length());
+            unordered_map<char,int> maps2;
+            for(int i=0;i<temp.length();i++)
+                maps2[temp[i]]++;
+            if(comparer(maps1,maps2))
+                return true;
+            else
+                continue;
+        }
+        return false;
+    }
+    bool comparer(unordered_map<char,int> mapsa, unordered_map<char,int> mapsb)
+    {
+        for(auto it=mapsa.begin();it!=mapsa.end();it++)
+        {
+            if(mapsb.find(it->first)!=mapsb.end())
+            {
+                if(mapsb[it->first] == mapsa[it->first])
+                    continue;
+                else
+                    return 0;
+            }
+            else
+                return 0;
+        }
+        return 1;
+    }
+};
