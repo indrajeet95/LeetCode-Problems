@@ -85,3 +85,35 @@ public:
         return 1;
     }
 };
+
+class Solution {
+public:
+    bool checkInclusion(string s1, string s2) {
+        if(s1.length()>s2.length())
+            return false;
+        vector<int> maps1(26,0);
+        for(int i=0;i<s1.length();i++)
+            maps1[s1[i]-'a']++;
+        for(int i=0;i<=s2.length()-s1.length();i++)
+        {
+            string temp = s2.substr(i,s1.length());
+            vector<int> maps2(26,0);
+            for(int i=0;i<temp.length();i++)
+                maps2[temp[i]-'a']++;
+            if(comparer(maps1,maps2))
+                return true;
+        }
+        return false;
+    }
+    bool comparer(vector<int> mapsa, vector<int> mapsb)
+    {
+        for(int i=0;i<=25;i++)
+        {
+            if(mapsb[i] == mapsa[i])
+                    continue;
+                else
+                    return 0;
+        }
+        return 1;
+    }
+};
