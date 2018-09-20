@@ -1,4 +1,5 @@
 // C program to print all permutations with duplicates allowed
+#include<headers>
 #include <stdio.h>
 #include <string.h>
  
