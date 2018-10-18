@@ -18,3 +18,23 @@ public:
     }
 };
 
+
+
+class Solution {
+public:
+    vector<int> maxSlidingWindow(vector<int>& nums, int k) {
+        vector<int> res;
+        if(nums.size() == 0)
+            return res;
+        multiset<int> window(nums.begin(),nums.begin()+k);
+        for(int i=k;i<=nums.size();i++)
+        {
+            res.push_back(*window.rbegin());
+            window.insert(nums[i]);
+            auto itr = window.find(nums[i-k]);
+            window.erase(itr);
+        }
+        return res;
+        
+    }
+};
