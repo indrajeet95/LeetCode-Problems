@@ -87,3 +87,50 @@ ListNode* merge2Lists(ListNode* l1, ListNode* l2) {
     delete newl2;
     return l1;
 }
+---------------------------------------------------
+Min Heap
+
+class Solution {
+    struct compare {
+      bool operator() (ListNode* l1, ListNode* l2) {
+          return l1->val > l2->val;
+      }  
+    };
+public:
+    ListNode *mergeKLists(vector<ListNode *> &lists) {
+        priority_queue<ListNode *, vector<ListNode *>, compare> q;
+        for (auto l : lists) {
+            if (l) {
+                q.push(l);
+            }
+        }
+        
+        if (q.empty()) {
+            return NULL;
+        }
+//        while(q.size())
+//        {
+  ///          cout << q.top()->val << endl;
+     //       q.pop();
+       // }
+//            cout << q->val << endl;
+        
+        ListNode* result = q.top();
+        q.pop();
+        if (result->next) {
+            q.push(result->next);
+        }
+
+        ListNode* tail = result;            
+        while (!q.empty()) {
+            tail->next = q.top();
+            q.pop();
+            tail = tail->next;
+            if (tail->next) {
+                q.push(tail->next);
+            }
+        }
+        
+        return result;
+    }
+};
