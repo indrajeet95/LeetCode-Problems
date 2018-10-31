@@ -35,3 +35,32 @@ public:
         return res;
     }
 };
+
+class Solution {
+public:
+    int rotatedDigits(int N) {
+        int res = 0;
+        for(int i=1;i<=N;i++)
+        {
+            if(isValid(i))
+                res++;
+        }
+        return res;
+    }
+    
+    bool isValid(int a)
+    {
+        unordered_set<int> valid = {2,5,6,9};
+        unordered_set<int> invalid = {3,4,7};
+        bool ans = false;
+        while(a>0)
+        {
+            if(valid.find(a%10) != valid.end())
+                ans = true;
+            else if(invalid.find(a%10) != invalid.end())
+                return false;
+            a = a/10;
+        }
+        return ans;
+    }
+};
