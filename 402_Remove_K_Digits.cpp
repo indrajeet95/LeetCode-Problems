@@ -36,3 +36,24 @@ public:
     }
 };
 
+
+class Solution {
+public:
+    string removeKdigits(string num, int k) {
+        if(num.size() == 0)
+            return NULL;
+        if(k == num.size())
+            return "0";
+        for(int i=0; i<k; i++)
+        {
+            int j=0;
+            while(num[j+1] >= num[j])
+                j++;
+            num.erase(j,1);
+        }
+        while(*num.begin() == '0')
+            num.erase(0,1);
+        return num=="" ? "0" : num;
+        
+    }
+};
