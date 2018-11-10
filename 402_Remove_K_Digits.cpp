@@ -57,3 +57,29 @@ public:
         
     }
 };
+
+class Solution {
+public:
+    string removeKdigits(string num, int k) {
+        if(k >= num.size())
+            return "0";
+        string res = "";
+        int keep = num.size() - k;
+        for(int i=0; i<num.size(); i++)
+        {
+            while(k>0 && res.back()>num[i])
+            {
+                res.pop_back();
+                k--;
+            }
+            res.push_back(num[i]);
+        }
+        res.erase(keep, string::npos);
+        
+        while(*res.begin() == '0')
+            res.erase(0,1);
+        return res == "" ? "0" : res;
+        
+        
+    }
+};
