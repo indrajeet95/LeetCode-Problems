@@ -69,3 +69,39 @@ public:
         return min_heap.size();
     }
 };
+
+/**
+ * Definition for an interval.
+ * struct Interval {
+ *     int start;
+ *     int end;
+ *     Interval() : start(0), end(0) {}
+ *     Interval(int s, int e) : start(s), end(e) {}
+ * };
+ */
+class Solution {
+public:
+    static bool compare1(Interval a, Interval b){
+        return a.start < b.start;
+    }
+    struct comp{
+        bool operator()(int a, int b)
+        {
+            return a>b;
+        }
+    };
+    int minMeetingRooms(vector<Interval>& intervals) {
+        if(intervals.size() == 0)
+            return 0;
+        priority_queue<int, vector<int>, comp> min_heap;
+        sort(intervals.begin(), intervals.end(), compare1);
+        min_heap.push(intervals[0].end);
+        for(int i=1; i<intervals.size(); i++)
+        {
+            if(intervals[i].start >= min_heap.top())
+                min_heap.pop();
+            min_heap.push(intervals[i].end);
+        }
+        return min_heap.size();
+    }
+};
