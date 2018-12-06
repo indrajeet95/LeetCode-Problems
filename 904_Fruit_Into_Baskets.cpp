@@ -21,3 +21,26 @@ public:
         return res;
     }
 };
+
+
+class Solution {
+public:
+    int totalFruit(vector<int>& tree) {
+        unordered_map<int,int> map;
+        int i=0;
+        int res = 0;
+        for(int j=0; j<tree.size(); j++)
+        {
+            map[tree[j]]++;
+            while(map.size()>2)
+            {
+                map[tree[i]]--;
+                if(map[tree[i]] == 0)
+                    map.erase(tree[i]);
+                i++;
+            }
+            res = max(res, j - i + 1); 
+        }
+        return res;
+    }
+};
