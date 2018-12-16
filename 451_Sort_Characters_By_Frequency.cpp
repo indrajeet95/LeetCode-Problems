@@ -17,3 +17,26 @@ public:
     return res;
     }
 };
+
+class Solution {
+public:
+    string frequencySort(string s) {
+        unordered_map<char,int> basics;
+        string res;
+        for(auto ch : s)
+            basics[ch]++;
+        multimap<int,char,greater<int>> advanced;
+        for(auto it = basics.begin(); it!= basics.end(); it++)
+            advanced.insert(make_pair(it->second, it->first));
+        //for(auto it = advanced.begin(); it!=advanced.end(); it++)
+        //    res.push_back(it->first);
+        for(auto it = advanced.begin(); it!=advanced.end(); it++)
+            cout << it->first <<  " " << it->second << endl;
+        for(auto it = advanced.begin(); it!=advanced.end(); it++)
+        {
+            for(int i=0; i<it->first; i++)
+                res.push_back(it->second);
+        }
+        return res;
+    }
+};
