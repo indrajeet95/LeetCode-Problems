@@ -25,6 +25,14 @@ public:
     }
 };
 
+/*
+EverNote 
+dp[i][j] gives the longest subsequence that end with A[i] and A[j]
+so basically we start at some point and try to go back and see if we can find the previous numbers as part of the fibonacci sequence
+dp[i][j] = max(dp[i][j], 1 + dp[index[A[j] - A[i]]][i]) if A[j] - A[i] == A[k] and k < i
+k,i,j are part of the fibonaaci subsequence
+big O n square is the time complexity
+*/
 class Solution {
 public:
     int lenLongestFibSubseq(vector<int>& A) {
