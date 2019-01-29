@@ -1,3 +1,6 @@
+
+https://leetcode.com/problems/min-stack/discuss/49014/Java-accepted-solution-using-one-stack
+
 class MinStack {
 public:
     stack<int> st;
