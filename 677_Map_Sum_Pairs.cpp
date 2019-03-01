@@ -60,3 +60,57 @@ public:
  * obj.insert(key,val);
  * int param_2 = obj.sum(prefix);
  */
+
+
+struct TrieNode {
+    unordered_map<char, TrieNode*> children;
+    int value;
+};
+
+class MapSum {
+    TrieNode* root;
+    unordered_map<string, int> map;
+public:
+    /** Initialize your data structure here. */
+    MapSum() {
+        root = new TrieNode(); 
+        root->value = 0;
+    }
+    
+    void insert(string key, int val) {
+        int delta = 0;
+        if(map.find(key) != map.end()) {
+            delta = val - map[key];
+            map[key] = val;
+        }
+        else {
+        map.insert(make_pair(key,val)); 
+            delta = val;
+        }
+        TrieNode* curr = root;
+        for(auto ch : key) {
+            if(curr->children[ch] == NULL)
+                curr->children[ch] = new TrieNode();
+            curr = curr->children[ch];
+            curr->value += delta;
+        }
+    }
+    
+    int sum(string prefix) {
+        int res = 0;
+        TrieNode* curr = root;
+        for(auto ch : prefix) {
+            curr = curr->children[ch];
+            if(curr == NULL)
+                return 0;
+        }
+        return curr->value;
+    }
+};
+
+/**
+ * Your MapSum object will be instantiated and called as such:
+ * MapSum obj = new MapSum();
+ * obj.insert(key,val);
+ * int param_2 = obj.sum(prefix);
+ */
