@@ -24,11 +24,10 @@ public:
 class Solution {
 public:
     int minCost(vector<vector<int>>& costs) {
-        if (costs == NULL || costs.length() == 0 || costs[0].length() == 0) 
-            return 0;
         int n = costs.size();
-        cout << n << endl;
-        vector<vector<int>> dp;
+	if(!n)
+	    return 0;
+        vector<vector<int>> dp(n, vector<int> (3,0));
         if(n == 1)
             return min(costs[0][2],min(costs[0][0], costs[0][1]));
         dp[0][0] = costs[0][0];
