@@ -1,3 +1,4 @@
+//DP - ON OWN
 class Solution {
 public:
     int minFallingPathSum(vector<vector<int>>& A) {
@@ -44,4 +45,31 @@ public:
         return res;
     }
     
+};
+
+class Solution {
+public:
+    int minFallingPathSum(vector<vector<int>>& A) {
+        int rows = A.size();
+        if(rows == 0)
+            return 0;
+        int cols = A[0].size();
+        for(int i = rows - 2; i >= 0; i--) {
+            for(int j = 0; j < cols; j++) {
+                int base = A[i][j];
+                A[i][j] += A[i+1][j];
+                if(j-1>=0)
+                    A[i][j] = min(A[i][j], base + A[i+1][j-1]);
+                if(j+1<cols)
+                    A[i][j] = min(A[i][j], base + A[i+1][j+1]);
+            }
+        }
+        int res = A[0][0];
+        for(int i=1; i<cols; i++) {
+            if(A[0][i] < res)
+                res = A[0][i];
+        }
+        return res;
+    }
+
 };
