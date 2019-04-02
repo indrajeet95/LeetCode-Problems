@@ -48,3 +48,33 @@ public:
         return res;
     }
 };
+
+
+//CLEANER
+class Solution {
+private:
+    bool static Compare(const pair<string,string> a, const pair<string,string> b) { 
+    return (a.second < b.second); 
+    }
+public:
+    vector<string> reorderLogFiles(vector<string>& logs) {
+        vector<pair<string, string>> letters;
+        vector<string> digit_logs;
+        for(auto str : logs) {
+            int index = str.find(' ');
+            string first = str.substr(0, index);
+            string second = str.substr(index+1);
+            if(second[0] >= 'a' && second[0] <= 'z')
+                letters.push_back(make_pair(first, second));
+            else
+                digit_logs.push_back(first + " " + second);
+        }
+        sort(letters.begin(), letters.end(), Compare);
+        vector<string> res;
+        for(auto pair : letters)
+            res.push_back(pair.first + " " + pair.second);
+        for(auto str: digit_logs)
+            res.push_back(str);
+        return res;
+    }
+};
