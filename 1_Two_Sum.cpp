@@ -48,3 +48,24 @@ public:
         return res;
     }
 };
+
+//4/11
+class Solution {
+public:
+    vector<int> twoSum(vector<int>& nums, int target) {
+        vector<int> res;
+        if(nums.size() == 0)
+            return res;
+        unordered_map<int,int> holder;
+        for(int i=0; i<nums.size(); i++) {
+            if(holder.find(nums[i]) == holder.end())
+                holder[target - nums[i]] = i;
+            else {
+                res.push_back(i);
+                res.push_back(holder[nums[i]]);
+                break;
+            }
+        }
+        return res;
+    }
+};
