@@ -28,3 +28,37 @@ private:
             markIslands(grid, visited, r, c + 1);
     }
 };
+
+//without visited matrix saving space
+
+class Solution {
+public:
+    void dfs(vector<vector<char>> &grid, int r, int c) {
+        int rows = grid.size();
+        int cols = grid[0].size();
+        grid[r][c] = '0';
+        if(r+1<rows && grid[r+1][c] == '1')
+            dfs(grid, r+1, c);
+        if(r-1>=0 && grid[r-1][c] == '1')
+            dfs(grid, r-1, c);
+        if(c+1 < cols && grid[r][c+1] == '1')
+            dfs(grid, r, c+1);
+        if(c-1 >= 0 && grid[r][c-1] == '1')
+            dfs(grid, r, c-1);
+    }
+
+    int numIslands(vector<vector<char>>& grid) {
+        int res = 0;
+        //vector<vector<bool>> visited (grid.size(), vector<bool> (grid[0].size(), false));
+        for(int i=0; i<grid.size(); i++) {
+            for(int j = 0; j < grid[0].size(); j++) {
+                if(grid[i][j] == '1') {
+                    res++;
+                    dfs(grid, i, j);
+                }
+            }
+        }
+        return res;
+    }
+
+};
